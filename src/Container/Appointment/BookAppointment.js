@@ -8,10 +8,11 @@ function Appointment(props) {
     const history = useHistory();
     const [updata, setUpdata] = useState(false)
 
-    useEffect(() => {
+    useEffect(() => 
+    {
         let localData = JSON.parse(localStorage.getItem("BookAppointment"));
 
-        if(props.location.state && localData !== null){
+            if(props.location.state && localData !== null){
 
             let localData = JSON.parse(localStorage.getItem("BookAppointment"));
 
@@ -94,9 +95,12 @@ function Appointment(props) {
             localStorage.setItem("BookAppointment", JSON.stringify(uData));
 
             history.replace();
+
             formik.resetForm();
-            setUpdata(false)
-            history.push("/ListAppointment")
+
+            setUpdata(false);
+
+            history.push("/ListAppointment");
     }
 
     return (
@@ -165,6 +169,7 @@ function Appointment(props) {
                                     <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                                 </div>
                                 <div className="text-center">
+                                    
                                     {
                                         updata ? 
                                         <button type="submit">updata an Appointment</button>
