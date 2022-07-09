@@ -7,7 +7,6 @@ function Appointment(props) {
 
     const history = useHistory();
     const [updata, setUpdata] = useState(false)
-    // const [updata, setUpdata] = useState(false)
 
 
 
