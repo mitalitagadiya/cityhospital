@@ -6,7 +6,11 @@ function Login_signup(props) {
     const [user, setUser] = useState('login');
     const [reset, setReset] = useState(false);
 
-    
+        const handleLogin = () => {
+            localStorage.setItem("user", "1234")
+        }
+
+
     let schemaObj, initVal;
 
     if(user === "login"){
@@ -58,7 +62,12 @@ function Login_signup(props) {
           validationSchema : schema,
 
           onSubmit: values => {
-            handleData(values);
+            if(user === 'login_signup'){
+                handleLogin()
+            } else {
+                handleData(values);
+            }
+            
           },
         });
 
@@ -114,12 +123,12 @@ function Login_signup(props) {
                         }
                         {
                             reset === "true"?
-                                <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Submit</button></div>
+                                <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Submit</button></div>
                                 :
                                 user === "login" ?
-                                    <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Login</button></div>
+                                    <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Login</button></div>
                                     :
-                                    <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Signup</button></div>
+                                    <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Signup</button></div>
                         }
                         {
                             user === "login" ?

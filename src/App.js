@@ -14,6 +14,8 @@ import Refexample from './Container/Refexample/Refexample';
 import Appointment from './Container/Appointment/BookAppointment';  
 import BookAppointment from './Container/Appointment/BookAppointment';
 import ListAppointment from './Container/Appointment/ListAppointment';
+import PublicRoute from './Route/PublicRoute';
+import PrivateRoute from './Route/PrivateRoute';
  
 
 function App() {
@@ -23,17 +25,17 @@ function App() {
       
       <Switch>
 
-        <Route path={"/"} exact component={Home}/>
-        <Route path={"/departments"} exact component={Departments}/>
-        <Route path={"/doctors"} exact component={Doctors}/>
-        <Route path={"/about"} exact component={About}/>
-        <Route path={"/contact"} exact component={Contact}/>
-        <Route path={"/login_signup"} exact component={Login_signup}/>
-        <Route path={"/Medicines"} exact component={Medicine} />
-        <Route path={"/refexample"} exact component={Refexample} />
-        <Route path={"/appointment"} exact component={Appointment} />
-        <Route path={"/BookAppointment"} exact component={BookAppointment} />
-        <Route path={"/ListAppointment"} exact component={ListAppointment} />
+        <PublicRoute path={"/"} exact component={Home}/>
+        <PublicRoute path={"/departments"} exact component={Departments}/>
+        <PublicRoute path={"/doctors"} exact component={Doctors}/>
+        <PublicRoute path={"/about"} exact component={About}/>
+        <PublicRoute path={"/contact"} exact component={Contact}/>
+        <PublicRoute path={"/login_signup"} restricted={true} exact component={Login_signup}/>
+        <PublicRoute path={"/Medicines"} exact component={Medicine} />
+        <PublicRoute path={"/refexample"} exact component={Refexample} />
+        <PublicRoute path={"/appointment"} exact component={Appointment} />
+        <PrivateRoute path={"/BookAppointment"} exact component={BookAppointment} />
+        <PrivateRoute path={"/ListAppointment"} exact component={ListAppointment} />
 
       </Switch>
 
