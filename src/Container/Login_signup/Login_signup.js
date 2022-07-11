@@ -7,7 +7,7 @@ function Login_signup(props) {
     const [reset, setReset] = useState(false);
 
         const handleLogin = () => {
-            localStorage.setItem("user", "1234")
+            localStorage.setItem("user", "mitali")
         }
 
 
