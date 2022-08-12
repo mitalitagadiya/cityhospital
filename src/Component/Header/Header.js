@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { themeContext } from '../../Context/ThemeContext';
+
 function Header(props) {
+
+    const value = useContext(themeContext);
+
+    console.log(value);
+
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -15,9 +23,12 @@ function Header(props) {
                         <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                         <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
                     </div>
+                    <button onClick={() => value.toggle_theme(value.theme)}>
+                        Change Theme
+                    </button>
                 </div>
             </div>
-            <header id="header" className="fixed-top">
+            <header id="header" className={`fixed-top ${value.theme}`}>
                 <div className="container d-flex align-items-center">
                     <div className="logo">
                         <a href="index.html">

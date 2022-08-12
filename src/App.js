@@ -11,33 +11,37 @@ import Contact from './Container/Contact/Contact';
 import Login_signup from './Container/Login_signup/Login_signup';
 import Medicine from './Container/Medicine/Medicine';
 import Refexample from './Container/Refexample/Refexample';
-import Appointment from './Container/Appointment/BookAppointment';  
+import Appointment from './Container/Appointment/BookAppointment';
 import BookAppointment from './Container/Appointment/BookAppointment';
 import ListAppointment from './Container/Appointment/ListAppointment';
- 
+import ToggleThemecontext from './Context/ThemeContext';
+
 
 function App() {
   return (
     <>
-      <Header />
-      
-      <Switch>
 
-        <Route path={"/"} exact component={Home}/>
-        <Route path={"/departments"} exact component={Departments}/>
-        <Route path={"/doctors"} exact component={Doctors}/>
-        <Route path={"/about"} exact component={About}/>
-        <Route path={"/contact"} exact component={Contact}/>
-        <Route path={"/login_signup"} exact component={Login_signup}/>
-        <Route path={"/Medicines"} exact component={Medicine} />
-        <Route path={"/refexample"} exact component={Refexample} />
-        <Route path={"/appointment"} exact component={Appointment} />
-        <Route path={"/BookAppointment"} exact component={BookAppointment} />
-        <Route path={"/ListAppointment"} exact component={ListAppointment} />
+      <ToggleThemecontext>
+        <Header />
 
-      </Switch>
+        <Switch>
 
-      <Footer />
+          <Route path={"/"} exact component={Home} />
+          <Route path={"/departments"} exact component={Departments} />
+          <Route path={"/doctors"} exact component={Doctors} />
+          <Route path={"/about"} exact component={About} />
+          <Route path={"/contact"} exact component={Contact} />
+          <Route path={"/login_signup"} exact component={Login_signup} />
+          <Route path={"/Medicines"} exact component={Medicine} />
+          <Route path={"/refexample"} exact component={Refexample} />
+          <Route path={"/appointment"} exact component={Appointment} />
+          <Route path={"/BookAppointment"} exact component={BookAppointment} />
+          <Route path={"/ListAppointment"} exact component={ListAppointment} />
+
+        </Switch>
+
+        <Footer />
+      </ToggleThemecontext>
     </>
   );
 }

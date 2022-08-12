@@ -1755,3 +1755,18 @@ section {
 .text-color{
   color: #dc3545!important;
 }
+.light {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.dark {
+  background-color: #000 !important;
+  color: #ffff !important;
+}
+.navbar a{
+  color: #FF6337 !important;
+}
+#header .logo{
+  color: #FF6337 !important;
+}
