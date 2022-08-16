@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
+import { signUpAction } from '../../redux/action/auth.action';
 
 function Login_signup(props) {
     const [user, setUser] = useState('login');
@@ -41,16 +42,18 @@ function Login_signup(props) {
     let schema = yup.object().shape(schemaObj);
 
     const handleData = (values) => {
-        let LocalData = JSON.parse(localStorage.getItem("user"));
+        // let LocalData = JSON.parse(localStorage.getItem("user"));
 
-        if (LocalData === null) {
-            localStorage.setItem("user", JSON.stringify([values]));
-        } else {
-            LocalData.push(values);
-            localStorage.setItem("user", JSON.stringify(LocalData));
-        }
+        // if (LocalData === null) {
+        //     localStorage.setItem("user", JSON.stringify([values]));
+        // } else {
+        //     LocalData.push(values);
+        //     localStorage.setItem("user", JSON.stringify(LocalData));
+        // }
 
-        console.log(values);
+        // console.log(values);
+
+        dispatch(signUpAction(values));
     }
 
         const formik = useFormik({
