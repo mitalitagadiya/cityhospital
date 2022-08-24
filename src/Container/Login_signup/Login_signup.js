@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
-import { signUpAction } from '../../redux/action/auth.action';
+import { signUpAction, signInAction } from '../../redux/action/auth.action';
 import { useDispatch } from 'react-redux';
 
 function Login_signup(props) {
     
-    const [user, setUser] = useState('login');
+    const [user, setUser] = useState("login");
     const [reset, setReset] = useState(false);
 
     
@@ -60,12 +60,20 @@ function Login_signup(props) {
         dispatch(signUpAction(values));
     }
 
+    const handleLogin = (values) => {
+        dispatch(signInAction(values));
+    }
+
+
         const formik = useFormik({
           initialValues: initVal,
           validationSchema : schema,
-
           onSubmit: values => {
-            handleData(values);
+            if(user === "login"){
+                handleLogin(values);
+            } else {
+                handleData(values);  
+            }
           },
         });
 
@@ -121,12 +129,12 @@ function Login_signup(props) {
                         }
                         {
                             reset === "true"?
-                                <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Submit</button></div>
+                                <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Submit</button></div>
                                 :
                                 user === "login" ?
-                                    <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Login</button></div>
+                                    <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Login</button></div>
                                     :
-                                    <div class="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Signup</button></div>
+                                    <div className="text-center"><button className='s-btn appointment-btn scrollto' type="submit">Signup</button></div>
                         }
                         {
                             user === "login" ?
