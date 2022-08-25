@@ -17,11 +17,13 @@ import ListAppointment from './Container/Appointment/ListAppointment';
 import ToggleThemecontext from './Context/ThemeContext';
 import { store } from './redux/Store';
 import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack'
 
 
 function App() {
   return (
     <>
+     <SnackbarProvider maxSnack={3}>
     <Provider store={store}>
       <ToggleThemecontext>
         <Header />
@@ -45,6 +47,7 @@ function App() {
         <Footer />
       </ToggleThemecontext>
     </Provider>
+    </SnackbarProvider>
     </>
   );
 }
