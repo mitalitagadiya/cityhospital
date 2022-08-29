@@ -52,7 +52,7 @@ export const SignInapi = (data) => {
 
                 if (user.emailVerified) {
 
-                    reject({ payload: "Login Is Succesfully"});
+                    resolve({ payload: "Login Is Succesfully"});
                 }
                 else
                 {

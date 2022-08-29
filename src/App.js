@@ -15,16 +15,18 @@ import Appointment from './Container/Appointment/BookAppointment';
 import BookAppointment from './Container/Appointment/BookAppointment';
 import ListAppointment from './Container/Appointment/ListAppointment';
 import ToggleThemecontext from './Context/ThemeContext';
-import { store } from './redux/Store';
+import { persistor, store } from './redux/Store';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack'
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 function App() {
   return (
     <>
-     <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={3}>
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <ToggleThemecontext>
         <Header />
 
@@ -46,6 +48,7 @@ function App() {
 
         <Footer />
       </ToggleThemecontext>
+      </PersistGate>
     </Provider>
     </SnackbarProvider>
     </>
