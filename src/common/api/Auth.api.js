@@ -67,7 +67,7 @@ export const SignInapi = (data) => {
 
                 if (errorCode.localeCompare("auth/user-not-found") === 0) 
                 {
-                    reject({ payload: "Please Check Your Email And Password." });
+                    resolve({ payload: "Please Check Your Email And Password." });
                 }
                 else
                 {
