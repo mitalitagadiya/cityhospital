@@ -1,5 +1,5 @@
 
-import { createUserWithEmailAndPassword,  sendEmailVerification, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
+import { createUserWithEmailAndPassword,  sendEmailVerification, sendPasswordResetEmail, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged} from "firebase/auth";
 import { auth } from "../../Firebase/Firebase";
 
 
@@ -56,7 +56,7 @@ export const SignInapi = (data) => {
                 }
                 else
                 {
-                    reject({ payload: "Please Varify Your Email."});
+                    resolve({ payload: "Varify Your Email."});
                 }
 
                 console.log(user);
@@ -93,5 +93,47 @@ export const SignOutapi = () => {
             {
                 reject({payload : "SomeThing Is Worng." });
             })
+    })
+}
+
+
+export const googleSigninApi = () => {
+    // console.log(data);
+
+    return new Promise((resolve, reject) => {
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                resolve({ payload: user })
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                reject({ payload: error })
+            });
+    })
+}
+
+export const ForgotPassApi = (data) => {
+    // console.log(data);
+
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+            .then(() => {
+                resolve({payload : "Forgot PassWord SuccessFully "})
+            })
+
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                reject({payload : "Your Email Is Wrong "})
+                console.log(errorCode);
+            });
     })
 }

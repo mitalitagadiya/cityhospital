@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
-import { signUpAction, signInAction } from '../../redux/action/auth.action';
+import { signUpAction, signInAction,  forgotPassWordAction, GoogleWithSignin } from '../../redux/action/auth.action';
 import { useDispatch } from 'react-redux';
 
 function Login_signup(props) {
@@ -64,17 +64,30 @@ function Login_signup(props) {
         dispatch(signInAction(values));
     }
 
+    
+    const handleSignWithGoogle = () => {
+        dispatch(GoogleWithSignin());
+    }
+
 
         const formik = useFormik({
           initialValues: initVal,
           validationSchema : schema,
           onSubmit: values => {
-            if(user === "login"){
-                handleLogin(values);
-            } else {
-                handleData(values);  
-            }
-          },
+        //     if(user === "login"){
+        //         handleLogin(values);
+        //     } else {
+        //         handleData(values);  
+        //     }
+        //   },
+        if (user === "login" && reset === false) {
+            handleLogin(values);
+        } else if(user === "login" && reset == false){
+            handleData(values);
+        }else if(reset === true){
+            dispatch(forgotPassWordAction(values));
+        }
+    },
         });
 
         const {handleChange, handleSubmit, handleBlur, errors, touched} = formik;

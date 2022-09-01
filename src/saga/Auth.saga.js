@@ -1,8 +1,8 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
 import * as ActionType from '../redux/ActionType';
-import { SignInapi, SignOutapi, SignUpapi } from '../common/api/Auth.api';
+import { SignInapi, SignOutapi, SignUpapi, ForgotPassApi, googleSigninApi } from '../common/api/Auth.api';
 import { setAlert } from '../redux/action/alert.action';
-import { signedInAction } from '../redux/action/auth.action';
+import { signedInAction, signedOutAction } from '../redux/action/auth.action';
 import { history } from '../History/history';
 
 function* Signup(action) {
@@ -48,6 +48,38 @@ function* SignOut(action) {
 }
 
 
+function* forgotPassword(action) {
+  try {
+
+    const user = yield call(ForgotPassApi, action.payload)
+    yield put(signedOutAction(user))
+    history.push('/');
+    console.log(user);
+    yield put(setAlert({ text: user.payload, color: "success" }))
+
+  } catch (e) {
+    yield put(setAlert({ text: e.payload, color: "error" }))
+    console.log(e);
+  }
+}
+
+function* googleSignin(action) {
+  try {
+
+    const user = yield call(googleSigninApi, action.payload);
+    yield put(signedInAction(user))
+    history.push('/');
+    yield put(setAlert({ text: "Login Is SuccessFully", color: "success" }))
+    console.log(user);
+
+  } catch (e) {
+    yield put(setAlert({ text: e.payload, color: "error" }))
+    console.log(e);
+  }
+}
+
+
+
 function* watchSignUp() {
   yield takeEvery(ActionType.SIGN_UP, Signup);
 }
@@ -57,14 +89,25 @@ function* watchSignIn(){
 }
 
 function* watchSignOut() {
-  yield takeEvery(ActionType.SIGN_OUT, SignOut)
+  yield takeEvery(ActionType.SIGN_OUT, SignOut);
 }
+
+function* watchForgotPass() {
+  yield takeEvery(ActionType.FORGOT_PASSWORD, forgotPassword);
+}
+
+function* watchGoogleSignin() {
+  yield takeEvery(ActionType.GOOGLESIGN_IN, googleSignin);
+}
+
 
 export function* signUpSaga() {
     yield all([
         watchSignUp(),
         watchSignIn(),
-        watchSignOut()
+        watchSignOut(),
+        watchForgotPass(),
+        watchGoogleSignin()
 
     ])
 }
