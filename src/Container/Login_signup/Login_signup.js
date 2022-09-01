@@ -78,8 +78,6 @@ function Login_signup(props) {
         //         handleLogin(values);
         //     } else {
         //         handleData(values);  
-        //     }
-        //   },
         if (user === "login" && reset === false) {
             handleLogin(values);
         } else if(user === "login" && reset == false){
